@@ -10,7 +10,7 @@ window:
     fullscr: False
     winType: pyglet
     waitBlanking: True
-    viewScale: [0.5, 0.5] #I added this parameter, which scales the whole screen, however this ends in only the mask and the fixation dot being scaled, Thus resulting in having only 10 bars (when this is set to [0.5, 0.5]) within the circle, and seeing the rest of the bars outside of the mask.
+    viewScale: [1,1] #I added this parameter, which scales the whole screen, however this ends in only the mask and the fixation dot being scaled, Thus resulting in having only 10 bars (when this is set to [0.5, 0.5]) within the circle, and seeing the rest of the bars outside of the mask.
 
 monitor:
     name: default
