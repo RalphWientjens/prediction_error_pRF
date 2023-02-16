@@ -38,4 +38,4 @@ In the runs notebook, the runs for the participants can be computed. A standard 
 - In the second section of the paradigm, the three configurations are shown consecutively for each bar-orientation in a random order.
 
 The final, total runs can be made by using either of the two large functions: create_violation_run() and new_run(). Here a name can be given to the total run, which can be subject specific. This run will then be saved in the run_list folder in the experiment folder.
-##### **Note! : Now the notebook only saves the violated part of the run, this still has to be altered to all three parts combined.**
+##### **Note! : Now the notebook only saves the violated part of the run, this still has to be altered to all three parts combined. Also: Currently, the window size is hard-coded to [1920, 1080], this still has to be changed if the window size is changed.**
