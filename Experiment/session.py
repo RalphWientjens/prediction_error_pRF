@@ -118,7 +118,7 @@ class PRFSession(Session):
         self.dot_count = 0
 
         # load the .tsv file, with the trials (normal and violated), unique for each individual (maybe we can insert this when running the experiment from terminal) 
-        data = np.genfromtxt(fname="run_list/violated_run.tsv", delimiter="\t", skip_header=1, filling_values=1)
+        data = np.genfromtxt(fname="run_list/novel_run.tsv", delimiter="\t", skip_header=1, filling_values=1)
 
         #create the number of trials, this could also be done from the trial file, or in the settings file?    
         self.trial_number = len(data[:,1])

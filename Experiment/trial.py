@@ -30,6 +30,7 @@ class PRFTrial(Trial):
         if self.session.settings['PRF stimulus settings']['Scanner sync']==True:
             #dummy value: if scanning or simulating a scanner, everything is synced to the output 't' of the scanner
             phase_durations = (0.5, (self.session.settings['PRF stimulus settings']['Bar step length']-0.5))
+            # phase_durations = [self.session.settings['PRF stimulus settings']['Bar step length']]
         else:
             #if not synced to a real or simulated scanner, take the bar pass step as length
             phase_durations = [self.session.settings['PRF stimulus settings']['Bar step length']] 

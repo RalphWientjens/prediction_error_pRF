@@ -4,13 +4,13 @@ preferences:
         units: deg
 
 window:
-    size: [889, 500] # this was [1920,1080]
+    size: [1920,1080] #this can be changed, making everything to scale, except the bars, this might have to change [889, 500] #
     pos: [0, 0] # maybe change the second parameter and try it in fulscreen (positive is up, negative is down)
     color: [0, 0, 0]
     fullscr: False
     winType: pyglet
     waitBlanking: True
-    viewScale: [1,1] #I added this parameter, which scales the whole screen, however this ends in only the mask and the fixation dot being scaled, Thus resulting in having only 10 bars (when this is set to [0.5, 0.5]) within the circle, and seeing the rest of the bars outside of the mask.
+    viewScale: [1,1] #I added this parameter, which scales the stimuli within the window, the outside of the bars (outside of the mask) are still visible, maybe alter this in the mask settings, or change the bar settings so they are based on the window settings? 
 
 monitor:
     name: default
@@ -46,7 +46,7 @@ PRF stimulus settings:
     Squares in bar: 2
     Bar pass steps: 20                # number of steps the bar takes to traverse the aperture
     Blanks length: 10                  # length of interbar periods (-1 in orientation). like bar pass steps, in units of TRs or bar step length
-    Bar orientations: [-1, 0, 90, -1, 180, 270,  -1, 0, 90, -1, 180, 270,  -1, 0, 90, -1, 180, 270]
+    Bar orientations: [-1, 0, 90, -1, 180, 270,  -1, 0, 90, -1, 180, 270,  -1, 0, 90, -1, 180, 270,-1]
     Bar width in degrees: 1
     Checkers motion speed: 3          # checkers motion speed. direction is randomly up/down at each bar step
     Size fixation dot in degrees: 0.05 # dot changes color on average every two TRs (or bar steps)
