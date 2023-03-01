@@ -4,19 +4,20 @@ preferences:
         units: deg
 
 window:
-    size: [1920,1080] #this can be changed, making everything to scale, except the bars, this might have to change [889, 500] #
-    pos: [0, 0] # maybe change the second parameter and try it in fulscreen (positive is up, negative is down)
+    size: [1920,1080] 
+    pos: [0, 0] 
     color: [0, 0, 0]
-    fullscr: False
+    fullscr: True
     winType: pyglet
     waitBlanking: True
-    viewScale: [1,1] #I added this parameter, which scales the stimuli within the window, the outside of the bars (outside of the mask) are still visible, maybe alter this in the mask settings, or change the bar settings so they are based on the window settings? 
+    viewScale: [1,1] #This parameter is added, if scaling is desired, it can be performed here 
+    allowStencil: True #This parameter is also added, necessary for the square aperture
 
 monitor:
     name: default
     width: 69.8  # in cm
-    distance: 210  # in cm
-    gamma: 1
+    distance: 194  # in cm, Should be ensured it is correct in the scanner
+    gamma: 2.1
 
 operating system: mac # specify the OS the code is run on as 'mac', 'linux', or 'windows'
 
@@ -28,7 +29,7 @@ eyetracker:
 
 mri:
     TR: 1.5  # seconds between volume acquisitions
-    topup_scan: False
+    topup_scan: False # moest een van deze factoren False/True worden van Tomas? Dit had te maken met de 8 TR's die van tevoren in de sequency zitten, die een soort T1 erbij maken, waardoor de 'waiting on scanner' text ook onnodig wordt
     topup_duration: 45 # topup scan duration in seconds (no 't's)
 
     #only relevant for scanning simulations
@@ -39,14 +40,13 @@ mri:
     skip: 0  # how many frames to silently omit initially during T1 stabilization, no sync pulse.
     sound: False  # simulate scanner noise
 
-
 PRF stimulus settings:
     Scanner sync: True                # set this to true to make bar move on input 't'
     Screenshot: True
     Squares in bar: 2
     Bar pass steps: 20                # number of steps the bar takes to traverse the aperture
-    Blanks length: 10                  # length of interbar periods (-1 in orientation). like bar pass steps, in units of TRs or bar step length
-    Bar orientations: [-1, 0, 90, -1, 180, 270,  -1, 0, 90, -1, 180, 270,  -1, 0, 90, -1, 180, 270,-1]
+    Blanks length: 15                  # length of interbar periods (-1 in orientation). like bar pass steps, in units of TRs or bar step length
+    Bar orientations: [-1, 0, 90, -1, 180, 270,  -1]
     Bar width in degrees: 1
     Checkers motion speed: 3          # checkers motion speed. direction is randomly up/down at each bar step
     Size fixation dot in degrees: 0.05 # dot changes color on average every two TRs (or bar steps)

@@ -29,7 +29,7 @@ class PRFTrial(Trial):
         #here we decide how to go from each trial (bar position) to the next.    
         if self.session.settings['PRF stimulus settings']['Scanner sync']==True:
             #dummy value: if scanning or simulating a scanner, everything is synced to the output 't' of the scanner
-            phase_durations = (0.5, (self.session.settings['PRF stimulus settings']['Bar step length']-0.5))
+            phase_durations = (0.8, (self.session.settings['PRF stimulus settings']['Bar step length']-0.5))
             # phase_durations = [self.session.settings['PRF stimulus settings']['Bar step length']]
         else:
             #if not synced to a real or simulated scanner, take the bar pass step as length
@@ -48,10 +48,10 @@ class PRFTrial(Trial):
 
     
     def draw(self, *args, **kwargs):
-        # draw bar stimulus and circular (raised cosine) aperture from Session class
+        # draw bar stimulus for the first phase, draw the fixation task in every phase. 
         if self.phase == 0:
             self.session.draw_stimulus() 
-            self.session.mask_stim.draw()
+            # self.session.mask_stim.draw() Instead of this circular  mask, we now use a square aperture which is automatically drawn
             self.session.draw_task()
         else:
             self.session.draw_task()

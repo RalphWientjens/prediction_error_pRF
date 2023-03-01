@@ -5,7 +5,8 @@ Created on Mon Feb 25 14:05:10 2019
 
 @author: marcoaqil
 """
-
+# Haal 'waiting voor scanner' weg
+import sys
 import numpy as np
 import os
 from psychopy import visual
@@ -59,23 +60,23 @@ class PRFSession(Session):
         
 
         #currently unused
-        #self.instruction_string = """Please fixate in the center of the screen. Your task is to respond whenever the dot changes color."""
+        # self.instruction_string = """Please fixate in the center of the screen. Your task is to respond whenever the dot changes color."""
         
 
-        #generate raised cosine alpha mask
+        #generate raised cosine alpha mask, currently unused, now the square aperture mask is used
         mask = filters.makeMask(matrixSize=self.win.size[0], 
-                                shape='raisedCosine', 
-                                radius=np.array([self.win.size[1]/self.win.size[0], 1.0]),
+                                shape='circle', 
+                                radius=np.array(self.settings['window']['viewScale']) * np.array([self.win.size[1]/self.win.size[0], 1.0]),
                                 center=(0.0, 0.0), 
                                 range=[-2, 2], 
-                                fringeWidth=0.08
+                                fringeWidth=0.02
                                 )
 
         #adjust mask size in case the stimulus runs on a mac 
         if self.settings['operating system'] == 'mac':
-            mask_size = [self.win.size[0]/2,self.win.size[1]/2]
+            mask_size = (1/np.array(self.settings['window']['viewScale']))*np.array([self.win.size[0]/2,self.win.size[1]/2])
         else: 
-            mask_size = [self.win.size[0],self.win.size[1]]
+            mask_size = (1/np.array(self.settings['window']['viewScale']))*np.array([self.win.size[0],self.win.size[1]])
             
         self.mask_stim = visual.GratingStim(self.win, 
                                         mask=-mask, 
@@ -87,7 +88,8 @@ class PRFSession(Session):
                                         color = [0,0,0]) 
         
 
-
+        #create a square mask, so that there is a square aperture in stead of a circular one
+        self.square_mask = visual.Aperture(self.win, size=1, shape='square', units='height')
 
         #as current basic task, generate fixation circles of different colors, with black border
         
@@ -101,15 +103,15 @@ class PRFSession(Session):
         #two colors of the fixation circle for the task
         self.fixation_disk_0 = visual.Circle(self.win, 
             units='pix', radius=fixation_radius_pixels, 
-            fillColor=[1,-1,-1], lineColor=[1,-1,-1])
+            fillColor=[0.88,-1,-1], lineColor=[0.88,-1,-1])
         
         self.fixation_disk_1 = visual.Circle(self.win, 
             units='pix', radius=fixation_radius_pixels, 
-            fillColor=[-1,1,-1], lineColor=[-1,1,-1])
+            fillColor=[-1,0.46,-1], lineColor=[-1,0.46,-1])
 
 
     def create_trials(self):
-        """creates trials by setting up prf stimulus sequence"""
+        """creates trials by setting up prf stimulus sequence from runs defined in the jupyter notebook"""
         self.trial_list=[]
         
         #simple tools to check subject responses online
@@ -117,10 +119,15 @@ class PRFSession(Session):
         self.total_responses = 0
         self.dot_count = 0
 
-        # load the .tsv file, with the trials (normal and violated), unique for each individual (maybe we can insert this when running the experiment from terminal) 
-        data = np.genfromtxt(fname="run_list/novel_run.tsv", delimiter="\t", skip_header=1, filling_values=1)
+        # load the name of the file containing the bar info from the run put into the terminal
+        subject = sys.argv[1]
+        run = sys.argv[3]
+        run_name = str(subject + '_' + run)
 
-        #create the number of trials, this could also be done from the trial file, or in the settings file?    
+        # load the .tsv file, with the trials, unique for each individual, each run is   
+        data = np.genfromtxt(fname="run_list/" + run_name + ".tsv", delimiter="\t", skip_header=1, filling_values=1)
+
+        #create the number of trials   
         self.trial_number = len(data[:,1])
 
         self.bar_orientation_at_TR = np.zeros(self.trial_number)
@@ -133,7 +140,7 @@ class PRFSession(Session):
             self.bar_pos_in_ori[i] = data[i,2]
             self.bar_direction_at_TR[i] = data[i,3]
 
-        #trial list
+        # Update the trial list
         for i in range(self.trial_number):
                 
             self.trial_list.append(PRFTrial(session=self,
@@ -166,7 +173,7 @@ class PRFSession(Session):
         np.save(opj(self.output_dir, self.output_str+'_DotSwitchColorTimes.npy'), self.dot_switch_color_times)
         print(self.win.size)
 
-    # This is the bar-stimulus that moves over the screen This is only phase 0, which runs for the first 500ms (0.5 seconds phase_duration) of each TR
+    # This is the bar-stimulus that moves over the screen This is only phase 0, which runs for the first 800ms (0.8 seconds phase_duration) of each TR (=0.5 TR for a TR of 1.6s)
     def draw_stimulus(self):
         #this timing is only used for the motion of checkerboards inside the bar. it does not have any effect on the actual bar motion
         present_time = self.clock.getTime()
@@ -207,7 +214,7 @@ class PRFSession(Session):
     def run(self):
         """run the session"""
         # cycle through trials
-        self.display_text('Waiting for scanner', keys=self.settings['mri'].get('sync', 't'))
+        # self.display_text('Waiting for scanner', keys=self.settings['mri'].get('sync', 't'))
 
         self.start_experiment()
         
