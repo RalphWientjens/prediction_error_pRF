@@ -10,7 +10,7 @@ window:
     fullscr: True
     winType: pyglet
     waitBlanking: True
-    viewScale: [1,1] #This parameter is added, if scaling is desired, it can be performed here 
+    viewScale: [1,1] #This parameter is added, if scaling is desired, it can be performed here, this is not yet applied to the bar-positions in the runs notebook. If scaled to a smaller window, this will result in less bars presented 
     allowStencil: True #This parameter is also added, necessary for the square aperture
 
 monitor:
@@ -19,7 +19,7 @@ monitor:
     distance: 194  # in cm, Should be ensured it is correct in the scanner
     gamma: 2.1
 
-operating system: mac # specify the OS the code is run on as 'mac', 'linux', or 'windows'
+operating system: 'mac' # specify the OS the code is run on as 'mac', 'linux', or 'windows'
 
 mouse:
     visible: True
@@ -28,8 +28,8 @@ eyetracker:
     model: eyelink
 
 mri:
-    TR: 1.5  # seconds between volume acquisitions
-    topup_scan: False # moest een van deze factoren False/True worden van Tomas? Dit had te maken met de 8 TR's die van tevoren in de sequency zitten, die een soort T1 erbij maken, waardoor de 'waiting on scanner' text ook onnodig wordt
+    TR: 1.6  # seconds between volume acquisitions
+    topup_scan: False 
     topup_duration: 45 # topup scan duration in seconds (no 't's)
 
     #only relevant for scanning simulations
@@ -51,6 +51,7 @@ PRF stimulus settings:
     Checkers motion speed: 3          # checkers motion speed. direction is randomly up/down at each bar step
     Size fixation dot in degrees: 0.05 # dot changes color on average every two TRs (or bar steps)
     Bar step length: 5                # in seconds. this is only used if Scanner sync is set to False
+    Bar exposure duration: 0.8       # in seconds. This is the amount of time that the bar is shown before it dissapears (within the same TR)
 
 Task settings: 
     response interval: 0.8 # time in s you allow the participant to respond that still counts as correct response

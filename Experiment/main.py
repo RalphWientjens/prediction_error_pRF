@@ -17,7 +17,6 @@ def main():
     # We would do 5 runs, which are loaded individually
     run = sys.argv[3]
     
-    print('--- these are the info that we might be able to use as input: ',subject, sess, run,'---')
     output_str= subject+'_'+sess+'_'+run
     
     output_dir = './logs/'+output_str+'_Logs'

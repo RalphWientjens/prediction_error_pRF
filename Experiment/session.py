@@ -87,9 +87,9 @@ class PRFSession(Session):
                                         pos = np.array((0.0,0.0)), 
                                         color = [0,0,0]) 
         
-
+        
         #create a square mask, so that there is a square aperture in stead of a circular one
-        self.square_mask = visual.Aperture(self.win, size=1, shape='square', units='height')
+        self.square_mask = visual.Aperture(self.win, size=mask_size, shape='square', units='height')
 
         #as current basic task, generate fixation circles of different colors, with black border
         
@@ -171,9 +171,8 @@ class PRFSession(Session):
 
         #only for testing purposes
         np.save(opj(self.output_dir, self.output_str+'_DotSwitchColorTimes.npy'), self.dot_switch_color_times)
-        print(self.win.size)
 
-    # This is the bar-stimulus that moves over the screen This is only phase 0, which runs for the first 800ms (0.8 seconds phase_duration) of each TR (=0.5 TR for a TR of 1.6s)
+    # This is the bar-stimulus that moves over the screen This is only phase 0, which runs for the first 800ms (see Bar exposure duration in settings) of each TR.
     def draw_stimulus(self):
         #this timing is only used for the motion of checkerboards inside the bar. it does not have any effect on the actual bar motion
         present_time = self.clock.getTime()
