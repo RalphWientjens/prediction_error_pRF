@@ -49,4 +49,5 @@ An additional three runs (run-6 to run-8) are computed for if there is extra tim
 
 The runs are computed by running the whole 'runs' notebook, which automatically assigns the correct names for the first twelve participant. Every time something in the settings is altered, the runs notebook should be re-run to compute the correct runs for all the participants. In the current repository there are already pre-made runs in the run-list based on the settings file.
 
-**Watch out! If the notebook is re-run, it will overwrite the previously saved runs. So only re-run the notebook before the experiment has started, and save the run_list in another directory to ensure there are seperate copies of the runs used for the scanning sessions and they are not overwritten or deleted.**
+### Watch out! 
+**If the notebook is re-run, it will overwrite the previously saved runs. So only re-run the notebook before the experiment has started, and save the run_list in another directory to ensure there are seperate copies of the runs used for the scanning sessions and they are not overwritten or deleted.**
