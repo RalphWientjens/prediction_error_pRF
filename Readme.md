@@ -3,11 +3,16 @@
 ## A repository for a PRF experiment with violations
 
 - This experiment is adaptation of the PRF_Experiment_Checkers by marcoaqil and uses the Exptools2 toolbox
-- requirements: psychopy & exptools2
+- Requirements: psychopy & exptools2
+- There is a yml file with a included in the experiment, which has all the necessary packages to work with exptools2. This can be used to create a conda environment. When created, exptools2 still has to be installed. This can be done using the following command in the terminal, when the environment is active: 
+
+pip install git+https://github.com/VU-Cog-Sci/exptools2/
+
+- If you want to use an eyetracker during the experiment, pylink stil has to be installed in the environment. 
 
 #### Usage:
 
-Run the following line from within the experient folder.
+Run the following line from within the experiment folder.
 
 - python main.py sub-xxx ses-x run-x
 
@@ -30,8 +35,8 @@ You can change the task parameters in the settings file under "Task settings:"
 -If the size of the stimuli are wished to be changed, this should be done by changing the window size.
 
 **For the fixation-task:**
-- you can specify how much time you allow for the participant to respond to the task that still counts as correct response (default is 0.8s), as "response interval: your time"
-- you can specify the timing of the color switches (default is 3.5s), as "color switch interval: your interval" Note: Make sure that the difference between two adjacent color switches is bigger than the time you give the participant to respond. The code adds a randomization of max. +1 or -1 to the color switch times, so e.g. in case of a color switch interval of 3.5, the two closest adjacent color switches will be 1.5s apart, well outside the response interval of 0.8s.
+- You can specify how much time you allow for the participant to respond to the task that still counts as correct response (default is 0.8s), as "response interval: your time"
+- You can specify the timing of the color switches (default is 3.5s), as "color switch interval: your interval" Note: Make sure that the difference between two adjacent color switches is bigger than the time you give the participant to respond. The code adds a randomization of max. +1 or -1 to the color switch times, so e.g. in case of a color switch interval of 3.5, the two closest adjacent color switches will be 1.5s apart, well outside the response interval of 0.8s.
 
 #### Runs notebook
 
