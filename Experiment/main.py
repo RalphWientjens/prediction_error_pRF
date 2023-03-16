@@ -16,6 +16,7 @@ def main():
     sess =  sys.argv[2]
     # We would do 5 runs, which are loaded individually
     run = sys.argv[3]
+    eyetracker_on = bool(sys.argv[4])
     
     output_str= subject+'_'+sess+'_'+run
     
@@ -27,7 +28,7 @@ def main():
     
     settings_file='./expsettings_2R.yml'
 
-    ts = PRFSession(output_str=output_str, output_dir=output_dir, settings_file=settings_file)
+    ts = PRFSession(output_str=output_str, output_dir=output_dir, settings_file=settings_file, eyetracker_on=eyetracker_on)
     ts.run()
 
 if __name__ == '__main__':

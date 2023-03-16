@@ -83,10 +83,14 @@ class PRFTrial(Trial):
                         self.exit_phase=True
                         #ideally, for speed, would want  getMovieFrame to be called right after the first winflip. 
                         #but this would have to be dun from inside trial.run()
-                        if self.session.settings['PRF stimulus settings']['Screenshot']==True:
+                        if self.session.settings['PRF stimulus settings']['Screenshot']:
                             self.session.win.getMovieFrame()
+
+                    if self.eyetracker_on:  # Sets status message
+                        msg = f"bar_orientation {self.bar_orientation} bar_position_in_ori {self.bar_position_in_ori} bar_direction {self.bar_direction}"
+                        self.session.tracker.sendMessage(msg)
                 else:
-                    event_type = 'response'
+                    event_type = 'bar_position_in_ori'
                     self.session.total_responses += 1
                      
                     #tracking percentage of correct responses per session
@@ -96,9 +100,7 @@ class PRFTrial(Trial):
                             self.session.correct_responses +=1 
                             # print(f'number correct responses: {self.session.correct_responses}') #testing
                              
-
-
- 
+                # log all the trial information and store it in the eyetracker file 
                 idx = self.session.global_log.shape[0]
                 self.session.global_log.loc[idx, 'trial_nr'] = self.trial_nr
                 self.session.global_log.loc[idx, 'onset'] = t
@@ -108,6 +110,10 @@ class PRFTrial(Trial):
  
                 for param, val in self.parameters.items():
                     self.session.global_log.loc[idx, param] = val
+                
+                if self.eyetracker_on:  # Sets status message
+                    msg = f"trial {self.trial_nr} response {key} onset {t} phase {self.phase} event_type {event_type}"
+                    self.session.tracker.sendMessage(msg)
  
                 #self.trial_log['response_key'][self.phase].append(key)
                 #self.trial_log['response_onset'][self.phase].append(t)

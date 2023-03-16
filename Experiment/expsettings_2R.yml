@@ -19,7 +19,7 @@ monitor:
     distance: 194  # in cm, Should be ensured it is correct in the scanner
     gamma: 2.1
 
-operating system: 'mac' # specify the OS the code is run on as 'mac', 'linux', or 'windows'
+operating system: 'linux' # specify the OS the code is run on as 'mac', 'linux', or 'windows'
 
 mouse:
     visible: True
@@ -50,7 +50,7 @@ PRF stimulus settings:
     Bar width in degrees: 1
     Checkers motion speed: 3          # checkers motion speed. direction is randomly up/down at each bar step
     Size fixation dot in degrees: 0.05 # dot changes color on average every two TRs (or bar steps)
-    Bar step length: 5                # in seconds. this is only used if Scanner sync is set to False
+    Bar step length: 1.6                # in seconds. this is only used if Scanner sync is set to False
     Bar exposure duration: 0.8       # in seconds. This is the amount of time that the bar is shown before it dissapears (within the same TR)
 
 Task settings: 

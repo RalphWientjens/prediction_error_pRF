@@ -13,7 +13,8 @@ from psychopy import visual
 from psychopy.visual import filters
 from psychopy import tools
 
-from exptools2.core.session import Session
+# from exptools2.core.session import Session
+from exptools2.core.eyetracker import PylinkEyetrackerSession
 from trial import PRFTrial
 from stim import PRFStim
 
@@ -21,13 +22,13 @@ opj = os.path.join
 
 
 
-class PRFSession(Session):
+class PRFSession(PylinkEyetrackerSession):
 
     
-    def __init__(self, output_str, output_dir, settings_file):
+    def __init__(self, output_str, output_dir, settings_file, eyetracker_on=False):
         
         
-        super().__init__(output_str=output_str, output_dir=output_dir, settings_file=settings_file)
+        super().__init__(output_str=output_str, output_dir=output_dir, settings_file=settings_file, eyetracker_on=eyetracker_on)
         
         #if we are scanning, here I set the mri_trigger manually to the 't'. together with the change in trial.py, this ensures syncing
         if self.settings['mri']['topup_scan']==True:
@@ -49,6 +50,10 @@ class PRFSession(Session):
         #create all stimuli and trials at the beginning of the experiment, to save time and resources        
         self.create_stimuli()
         self.create_trials()
+
+        if self.eyetracker_on:
+            self.calibrate_eyetracker()
+            self.start_recording_eyetracker()
 
     def create_stimuli(self):
 
@@ -144,13 +149,12 @@ class PRFSession(Session):
         for i in range(self.trial_number):
                 
             self.trial_list.append(PRFTrial(session=self,
-                                            trial_nr=i,
-                                               
-                           bar_orientation=self.bar_orientation_at_TR[i],
-                           bar_position_in_ori=self.bar_pos_in_ori[i],
-                           bar_direction=self.bar_direction_at_TR[i]
-                           #,tracker=self.tracker
-                           ))
+                                            trial_nr=i,                                               
+                                            bar_orientation=self.bar_orientation_at_TR[i],
+                                            bar_position_in_ori=self.bar_pos_in_ori[i],
+                                            bar_direction=self.bar_direction_at_TR[i]
+                                            #,tracker=self.tracker
+                                            ))
 
 
         #times for dot color change. continue the task into the topup
@@ -213,7 +217,7 @@ class PRFSession(Session):
     def run(self):
         """run the session"""
         # cycle through trials
-        # self.display_text('Waiting for scanner', keys=self.settings['mri'].get('sync', 't'))
+        self.display_text('', keys=self.settings['mri'].get('sync', 't'))
 
         self.start_experiment()
         
@@ -232,7 +236,7 @@ class PRFSession(Session):
         #print('Percentage of correctly answered trials: %.2f%%'%(100*self.correct_responses/len(self.dot_switch_color_times)))
         
         
-        if self.settings['PRF stimulus settings']['Screenshot']==True:
+        if self.settings['PRF stimulus settings']['Screenshot']:
             self.win.saveMovieFrames(opj(self.screen_dir, self.output_str+'_Screenshot.png'))
             
         self.close()
