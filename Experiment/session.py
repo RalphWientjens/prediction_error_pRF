@@ -112,7 +112,7 @@ class PRFSession(PylinkEyetrackerSession):
         
         self.fixation_disk_1 = visual.Circle(self.win, 
             units='pix', radius=fixation_radius_pixels, 
-            fillColor=[-1,0.46,-1], lineColor=[-1,0.46,-1])
+            fillColor=[-1,1.5,-1], lineColor=[-1,1.5,-1])
 
 
     def create_trials(self):
