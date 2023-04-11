@@ -1,0 +1,85 @@
+PRF stimulus settings:
+    Bar exposure duration: 0.8
+    Bar orientations:
+    - -1
+    - 0
+    - 90
+    - -1
+    - 180
+    - 270
+    - -1
+    Bar pass steps: 20
+    Bar step length: 1.6
+    Bar width in degrees: 1
+    Blanks length: 15
+    Checkers motion speed: 3
+    Scanner sync: true
+    Screenshot: true
+    Size fixation dot in degrees: 0.05
+    Squares in bar: 2
+Task settings:
+    color switch interval: 3.5
+    response interval: 0.8
+eyetracker:
+    address: 100.1.1.1
+    dot_size: 0.1
+    model: eyelink
+    options:
+        active_eye: left
+        automatic_calibration_pacing: 1000
+        autothreshold_click: true
+        autothreshold_repeat: true
+        binocular_enabled: false
+        calibration_type: HV9
+        enable_automatic_calibration: true
+        enable_camera_position_detect: true
+        enable_search_limits: true
+        file_event_filter: LEFT,RIGHT,FIXATION,SACCADE,BLINK,MESSAGE,BUTTON,INPUT
+        heuristic_filter: 2
+        link_event_filter: LEFT,RIGHT,FIXATION,SACCADE,BLINK,BUTTON
+        link_sample_data: LEFT,RIGHT,GAZE,GAZERES,AREA,STATUS,HTARGET
+        pupil_size_diameter: true
+        sample_rate: 1000
+        track_search_limits: true
+        x_gaze_constraint: AUTO
+        y_gaze_constraint: AUTO
+monitor:
+    distance: 194
+    gamma: 2.1
+    name: default
+    width: 69.8
+mouse:
+    visible: true
+mri:
+    TA: 1.5
+    TR: 1.6
+    simulate: false
+    skip: 0
+    sound: false
+    sync: t
+    topup_duration: 45
+    topup_scan: false
+    volumes: 100
+operating system: linux
+preferences:
+    general:
+        audioLib: SoundDevice
+        units: deg
+window:
+    allowStencil: true
+    color:
+    - 0
+    - 0
+    - 0
+    fullscr: false
+    pos:
+    - 0
+    - 0
+    size:
+    - 1920
+    - 1080
+    viewScale:
+    - 1
+    - 1
+    waitBlanking: true
+    winType: pyglet

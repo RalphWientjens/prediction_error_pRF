@@ -22,7 +22,7 @@ monitor:
 operating system: 'linux' # specify the OS the code is run on as 'mac', 'linux', or 'windows'
 
 mouse:
-    visible: True
+    visible: False
 
 eyetracker:
     model: eyelink
