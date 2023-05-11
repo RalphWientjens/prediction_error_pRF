@@ -40,6 +40,7 @@ class PRFTrial(Trial):
             if self.ID == self.session.trial_number-1:
                 phase_durations=[self.session.topup_scan_duration]
             
+        self.frame_count = 0
 
         super().__init__(session, trial_nr,
             phase_durations, verbose=False,
@@ -53,10 +54,17 @@ class PRFTrial(Trial):
             self.session.draw_stimulus() 
             # self.session.mask_stim.draw() Instead of this circular  mask, we now use a square aperture which is automatically drawn
             self.session.draw_task()
+
         else:
             self.session.draw_task()
         
-        
+        self.frame_count += 1
+
+        if self.frame_count ==2:
+            if self.session.settings['PRF stimulus settings']['Screenshot']==True:
+                self.session.win.getMovieFrame()
+                fname = opj(self.session.screen_dir, self.session.output_str+'_Screenshots{}.png'.format(str(self.trial_nr))) 
+                self.session.win.saveMovieFrames(fname)
         
     def get_events(self):
         """ Logs responses/triggers """
@@ -67,9 +75,6 @@ class PRFTrial(Trial):
                 np.save(opj(self.session.output_dir, self.session.output_str+'_simple_response_data.npy'), {"Expected number of responses":len(self.session.dot_switch_color_times),
                                                                                   "Total subject responses":self.session.total_responses,
                                                                                   f"Correct responses (within {self.session.settings['Task settings']['response interval']}s of dot color change)":self.session.correct_responses})
-           
-                if self.session.settings['PRF stimulus settings']['Screenshot']==True:
-                    self.session.win.saveMovieFrames(opj(self.session.screen_dir, self.session.output_str+'_Screenshot.png'))
                      
                 self.session.close()
                 self.session.quit()
@@ -81,10 +86,6 @@ class PRFTrial(Trial):
                     #marco edit. the second bit is a hack to avoid double-counting of the first t when simulating a scanner
                     if self.session.settings['PRF stimulus settings']['Scanner sync']==True and t>0.1:                       
                         self.exit_phase=True
-                        #ideally, for speed, would want  getMovieFrame to be called right after the first winflip. 
-                        #but this would have to be dun from inside trial.run()
-                        if self.session.settings['PRF stimulus settings']['Screenshot']:
-                            self.session.win.getMovieFrame()
 
                     if self.eyetracker_on:  # Sets status message
                         msg = f"bar_orientation {self.bar_orientation} bar_position_in_ori {self.bar_position_in_ori} bar_direction {self.bar_direction}"

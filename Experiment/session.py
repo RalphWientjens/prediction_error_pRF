@@ -237,7 +237,7 @@ class PRFSession(PylinkEyetrackerSession):
         
         
         if self.settings['PRF stimulus settings']['Screenshot']:
-            self.win.saveMovieFrames(opj(self.screen_dir, self.output_str+'_Screenshot.png'))
+            self.win.saveMovieFrames(opj(self.screen_dir, self.output_str+'_Screenshots{}.png'.format(str(self.trial_nr))))
             
         self.close()
 
