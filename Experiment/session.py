@@ -4,8 +4,9 @@
 Created on Mon Feb 25 14:05:10 2019
 
 @author: marcoaqil
+Adapted by Ralph Wientjens(ralphw713@hotmail.com)
 """
-# Haal 'waiting voor scanner' weg
+
 import sys
 import numpy as np
 import os

@@ -4,6 +4,7 @@
 Created on Mon Feb 25 14:04:44 2019
 
 @author: marcoaqil
+Adapted by Ralph Wientjens(ralphw713@hotmail.com)
 """
 import sys
 import os
